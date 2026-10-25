@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Marketplace Barang Bekas Berbasis Web
 
 Proyek pribadi menggunakan **Laravel 13** dan **MySQL** (database `db_mbb`).
@@ -83,3 +84,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# Marketplace-Barang-Bekas
+Project Pribadi  E-Comerce &amp; Kewirausahaan
+>>>>>>> a1d3003e1417fa9b06da168675f851b5ab763372
