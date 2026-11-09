@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 870" fill="none">
+  <rect width="800" height="870" fill="#E3D9C6"/>
+  <circle cx="400" cy="430" r="190" fill="#D9541E" fill-opacity="0.14"/>
+  <rect x="75" y="75" width="650" height="720" fill="#F3EEE3" stroke="#111111" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <circle cx="128" cy="132" r="7" fill="#D9541E"/>
+  <text x="148" y="138" fill="#111111" font-family="sans-serif" font-size="16" font-weight="800" letter-spacing="3.5">ALUR TRANSAKSI &bull; 03 / 03</text>
+  <line x1="120" y1="166" x2="680" y2="166" stroke="#111111" stroke-opacity="0.25" stroke-width="1.5"/>
+
+  <!-- Step Number -->
+  <text x="120" y="250" fill="#D9541E" font-family="Georgia, serif" font-style="italic" font-size="64" font-weight="700">03</text>
+  <text x="215" y="232" fill="#111111" font-family="sans-serif" font-size="34" font-weight="800">Bertemu untuk COD</text>
+  <text x="215" y="262" fill="#111111" fill-opacity="0.65" font-family="sans-serif" font-size="18" font-weight="600">Cek langsung di tempat umum &amp; transaksi aman</text>
+
+  <!-- Illustration: Map Pin & Meeting Point -->
+  <g transform="translate(120, 305)">
+    <rect x="0" y="0" width="560" height="335" fill="#111111"/>
+    <!-- Grid lines map effect -->
+    <line x1="0" y1="110" x2="560" y2="110" stroke="#F3EEE3" stroke-opacity="0.12" stroke-width="2"/>
+    <line x1="0" y1="220" x2="560" y2="220" stroke="#F3EEE3" stroke-opacity="0.12" stroke-width="2"/>
+    <line x1="185" y1="0" x2="185" y2="335" stroke="#F3EEE3" stroke-opacity="0.12" stroke-width="2"/>
+    <line x1="375" y1="0" x2="375" y2="335" stroke="#F3EEE3" stroke-opacity="0.12" stroke-width="2"/>
+
+    <!-- Ring Target -->
+    <ellipse cx="280" cy="255" rx="135" ry="34" stroke="#D9541E" stroke-width="4" stroke-dasharray="8 6"/>
+    <ellipse cx="280" cy="255" rx="70" ry="18" fill="#D9541E" fill-opacity="0.28"/>
+
+    <!-- Center Pin -->
+    <path d="M280 245 C280 245 352 162 352 108 C352 64 320 32 280 32 C240 32 208 64 208 108 C208 162 280 245 280 245 Z" fill="#D9541E" stroke="#F3EEE3" stroke-width="5"/>
+    <circle cx="280" cy="108" r="26" fill="#111111"/>
+  </g>
+
+  <!-- Progress Indicator -->
+  <rect x="120" y="705" width="180" height="8" fill="#111111" fill-opacity="0.18"/>
+  <rect x="310" y="705" width="180" height="8" fill="#111111" fill-opacity="0.18"/>
+  <rect x="500" y="705" width="180" height="8" fill="#D9541E"/>
+</svg>
+

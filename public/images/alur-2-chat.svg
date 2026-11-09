@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 870" fill="none">
+  <rect width="800" height="870" fill="#E3D9C6"/>
+  <circle cx="190" cy="650" r="150" fill="#D9541E" fill-opacity="0.16"/>
+  <rect x="75" y="75" width="650" height="720" fill="#F3EEE3" stroke="#111111" stroke-width="2.5"/>
+
+  <!-- Header -->
+  <circle cx="128" cy="132" r="7" fill="#D9541E"/>
+  <text x="148" y="138" fill="#111111" font-family="sans-serif" font-size="16" font-weight="800" letter-spacing="3.5">ALUR TRANSAKSI &bull; 02 / 03</text>
+  <line x1="120" y1="166" x2="680" y2="166" stroke="#111111" stroke-opacity="0.25" stroke-width="1.5"/>
+
+  <!-- Step Number -->
+  <text x="120" y="250" fill="#D9541E" font-family="Georgia, serif" font-style="italic" font-size="64" font-weight="700">02</text>
+  <text x="215" y="232" fill="#111111" font-family="sans-serif" font-size="34" font-weight="800">Chat Penjual</text>
+  <text x="215" y="262" fill="#111111" fill-opacity="0.65" font-family="sans-serif" font-size="18" font-weight="600">Tanya detail kondisi &amp; negosiasi harga</text>
+
+  <!-- Illustration: Two Chat Bubbles -->
+  <g transform="translate(120, 305)">
+    <!-- Buyer Bubble -->
+    <path d="M0 15 H370 V165 H95 L35 210 V165 H0 Z" fill="#111111"/>
+    <circle cx="52" cy="70" r="18" fill="#D9541E"/>
+    <line x1="88" y1="62" x2="320" y2="62" stroke="#F3EEE3" stroke-width="7"/>
+    <line x1="88" y1="92" x2="265" y2="92" stroke="#F3EEE3" stroke-opacity="0.7" stroke-width="5"/>
+    <line x1="88" y1="118" x2="210" y2="118" stroke="#D9541E" stroke-width="5"/>
+
+    <!-- Seller Bubble -->
+    <path d="M190 140 H560 V290 H525 V335 L465 290 H190 Z" fill="#D9541E" stroke="#111111" stroke-width="3"/>
+    <circle cx="242" cy="195" r="18" fill="#111111"/>
+    <line x1="278" y1="188" x2="510" y2="188" stroke="#111111" stroke-width="7"/>
+    <line x1="278" y1="218" x2="465" y2="218" stroke="#111111" stroke-opacity="0.75" stroke-width="5"/>
+    <rect x="278" y="240" width="135" height="24" rx="12" fill="#F3EEE3"/>
+  </g>
+
+  <!-- Progress Indicator -->
+  <rect x="120" y="705" width="180" height="8" fill="#111111" fill-opacity="0.18"/>
+  <rect x="310" y="705" width="180" height="8" fill="#D9541E"/>
+  <rect x="500" y="705" width="180" height="8" fill="#111111" fill-opacity="0.18"/>
+</svg>
+

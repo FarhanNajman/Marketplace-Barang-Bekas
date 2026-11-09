@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 870" fill="none">
+  <!-- Background -->
+  <rect width="800" height="870" fill="#E3D9C6"/>
+  <circle cx="630" cy="180" r="140" fill="#D9541E" fill-opacity="0.16"/>
+
+  <!-- Main Editorial Frame -->
+  <rect x="70" y="70" width="660" height="730" fill="#F3EEE3" stroke="#111111" stroke-width="2.5"/>
+
+  <!-- Header Inside Card -->
+  <circle cx="122" cy="128" r="7" fill="#D9541E"/>
+  <text x="142" y="134" fill="#111111" font-family="sans-serif" font-size="16" font-weight="800" letter-spacing="3.5">ALUR TRANSAKSI</text>
+  <line x1="115" y1="162" x2="685" y2="162" stroke="#111111" stroke-opacity="0.25" stroke-width="1.5"/>
+
+  <!-- Step 01: Cari Barang -->
+  <g transform="translate(115, 195)">
+    <rect x="0" y="0" width="570" height="150" fill="#FBF8F2" stroke="#111111" stroke-width="2"/>
+    <rect x="24" y="25" width="100" height="100" fill="#111111"/>
+    <!-- Magnifying Glass Icon -->
+    <circle cx="68" cy="69" r="22" stroke="#F3EEE3" stroke-width="4"/>
+    <line x1="84" y1="85" x2="102" y2="103" stroke="#D9541E" stroke-width="6" stroke-linecap="round"/>
+    <!-- Text -->
+    <text x="150" y="55" fill="#D9541E" font-family="Georgia, serif" font-style="italic" font-size="24" font-weight="700">01</text>
+    <text x="188" y="55" fill="#111111" font-family="sans-serif" font-size="22" font-weight="800">Cari Barang</text>
+    <text x="150" y="88" fill="#111111" fill-opacity="0.7" font-family="sans-serif" font-size="16" font-weight="600">Temukan barang layak pakai di kecamatan terdekat</text>
+    <rect x="150" y="106" width="140" height="6" fill="#D9541E"/>
+  </g>
+
+  <!-- Connector 1 -> 2 -->
+  <path d="M400 345 L400 380" stroke="#111111" stroke-width="2.5" stroke-dasharray="5 5"/>
+
+  <!-- Step 02: Chat Penjual -->
+  <g transform="translate(115, 380)">
+    <rect x="0" y="0" width="570" height="150" fill="#FBF8F2" stroke="#111111" stroke-width="2"/>
+    <rect x="24" y="25" width="100" height="100" fill="#D9541E" stroke="#111111" stroke-width="2"/>
+    <!-- Chat Bubble Icon -->
+    <path d="M46 50 H102 V86 H68 L52 98 V86 H46 Z" fill="#F3EEE3" stroke="#111111" stroke-width="3"/>
+    <line x1="58" y1="64" x2="90" y2="64" stroke="#111111" stroke-width="3.5"/>
+    <line x1="58" y1="74" x2="78" y2="74" stroke="#111111" stroke-width="3.5"/>
+    <!-- Text -->
+    <text x="150" y="55" fill="#D9541E" font-family="Georgia, serif" font-style="italic" font-size="24" font-weight="700">02</text>
+    <text x="188" y="55" fill="#111111" font-family="sans-serif" font-size="22" font-weight="800">Chat Penjual</text>
+    <text x="150" y="88" fill="#111111" fill-opacity="0.7" font-family="sans-serif" font-size="16" font-weight="600">Tanyakan kondisi detail &amp; sepakati harga langsung</text>
+    <rect x="150" y="106" width="210" height="6" fill="#111111"/>
+  </g>
+
+  <!-- Connector 2 -> 3 -->
+  <path d="M400 530 L400 565" stroke="#111111" stroke-width="2.5" stroke-dasharray="5 5"/>
+
+  <!-- Step 03: Bertemu COD -->
+  <g transform="translate(115, 565)">
+    <rect x="0" y="0" width="570" height="150" fill="#111111" stroke="#111111" stroke-width="2"/>
+    <rect x="24" y="25" width="100" height="100" fill="#F3EEE3"/>
+    <!-- Map Pin Icon -->
+    <path d="M74 98 C74 98 98 72 98 55 C98 41 87 31 74 31 C61 31 50 41 50 55 C50 72 74 98 74 98 Z" fill="#D9541E" stroke="#111111" stroke-width="3.5"/>
+    <circle cx="74" cy="55" r="8" fill="#F3EEE3"/>
+    <!-- Text -->
+    <text x="150" y="55" fill="#D9541E" font-family="Georgia, serif" font-style="italic" font-size="24" font-weight="700">03</text>
+    <text x="188" y="55" fill="#F3EEE3" font-family="sans-serif" font-size="22" font-weight="800">Bertemu COD</text>
+    <text x="150" y="88" fill="#F3EEE3" fill-opacity="0.8" font-family="sans-serif" font-size="16" font-weight="600">Cek barang langsung di tempat umum yang aman</text>
+    <rect x="150" y="106" width="270" height="6" fill="#D9541E"/>
+  </g>
+</svg>
