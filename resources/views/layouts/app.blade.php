@@ -92,7 +92,7 @@
                             <rect x="14" y="14" width="7" height="7" rx="1"/>
                             <rect x="3" y="14" width="7" height="7" rx="1"/>
                         </svg>
-                        <span>Jelajahi Katalog</span>
+                        <span>Beranda</span>
                     </a>
                     <a href="{{ route('wishlist.index') }}" class="hamburger-nav-item {{ request()->routeIs('wishlist.*') ? 'active' : '' }}" role="menuitem">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -134,7 +134,7 @@
                             <circle cx="12" cy="12" r="10"/>
                             <path d="M12 16v-4M12 8h.01"/>
                         </svg>
-                        <span>Tentang Barantau</span>
+                        <span>Tentang BARANTAU</span>
                     </a>
                 </div>
 
@@ -147,21 +147,23 @@
                         type="button"
                         id="btn-theme-toggle"
                         class="theme-toggle-btn hamburger-theme-btn"
+                        role="switch"
                         onclick="toggleBarantauTheme()"
-                        aria-label="Alihkan ke mode gelap"
-                        aria-pressed="false"
+                        aria-label="Mode Terang, klik untuk beralih ke mode gelap"
+                        aria-checked="false"
                     >
-                        <span class="hamburger-theme-left">
-                            <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                            </svg>
-                            <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <span class="theme-switch-icon" aria-hidden="true">
+                            <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="5"/>
                                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
                             </svg>
-                            <span class="theme-toggle-label" data-theme-label>Beralih ke Mode Gelap</span>
+                            <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                            </svg>
                         </span>
-                        <span class="hamburger-theme-badge" data-theme-status>Aktif: Terang</span>
+                        <span class="theme-switch-track" aria-hidden="true">
+                            <span class="theme-switch-thumb"></span>
+                        </span>
                     </button>
                 </div>
 
@@ -259,36 +261,38 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn header-search-submit" id="btn-cari-header">
-                        Cari
-                    </button>
+                    <div class="header-search-actions">
+                        <button type="submit" class="btn header-search-submit" id="btn-cari-header">
+                            Cari
+                        </button>
+                        <a
+                            id="nav-wishlist"
+                            href="{{ route('wishlist.index') }}"
+                            class="header-wishlist-link {{ request()->routeIs('wishlist.*') ? 'active' : '' }}"
+                            title="Lihat Wishlist"
+                            aria-label="Lihat Wishlist"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                <path d="M12 20.5s-7.5-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5.5c-2 4.4-9.5 9-9.5 9Z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </form>
 
-                <!-- Tautan Wishlist, Masuk/Daftar (atau Profil), & Tombol Jual Barang -->
+                <!-- Tautan Masuk (atau Profil) & Tombol Jual Barang -->
                 <div class="header-actions">
-                    <a
-                        id="nav-wishlist"
-                        href="{{ route('wishlist.index') }}"
-                        class="header-wishlist-link {{ request()->routeIs('wishlist.*') ? 'active' : '' }}"
-                        title="Lihat Wishlist"
-                        aria-label="Lihat Wishlist"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                            <path d="M12 20.5s-7.5-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 5.5c-2 4.4-9.5 9-9.5 9Z"/>
-                        </svg>
-                    </a>
 
                     @guest
-                        <a id="nav-login" href="{{ route('login') }}" class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">
-                            Masuk
-                        </a>
-                        <a id="nav-register" href="{{ route('register') }}" class="button-outline header-btn-compact">
-                            Daftar
-                        </a>
                         <a id="nav-pasarkan" href="{{ route('login') }}" class="button-primary header-btn-sell">
                             Jual Barang
                         </a>
+                        <a id="nav-login" href="{{ route('login') }}" class="nav-link nav-link-accent {{ request()->routeIs('login') ? 'active' : '' }}">
+                            Masuk
+                        </a>
                     @else
+                        <a id="nav-pasarkan" href="{{ route('barang.create') }}" class="button-primary header-btn-sell">
+                            Jual Barang
+                        </a>
                         <a
                             id="nav-profil"
                             href="{{ route('profil.show', ['username' => auth()->user()->username]) }}"
@@ -299,22 +303,13 @@
                                 @if (auth()->user()->urlFotoProfil())
                                     <img src="{{ auth()->user()->urlFotoProfil() }}" alt="Foto profil {{ auth()->user()->username }}">
                                 @else
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="12" cy="8" r="4"/>
                                         <path d="M4 20c1.8-3.8 5-6 8-6s6.2 2.2 8 6"/>
                                     </svg>
                                 @endif
                             </span>
                             <span class="nav-user-actor-name">{{ auth()->user()->username }}</span>
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                            @csrf
-                            <button type="submit" id="btn-logout" class="button-outline header-btn-compact">
-                                Keluar
-                            </button>
-                        </form>
-                        <a id="nav-pasarkan" href="{{ route('barang.create') }}" class="button-primary header-btn-sell">
-                            Jual Barang
                         </a>
                     @endguest
                 </div>
@@ -349,11 +344,11 @@
                             class="btn-back-barantau"
                             id="btn-kembali-halaman"
                             aria-label="Kembali ke halaman sebelumnya"
+                            title="Kembali"
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M19 12H5M12 19l-7-7 7-7"/>
                             </svg>
-                            <span>Kembali</span>
                         </a>
                     </div>
                 @endif
@@ -377,7 +372,7 @@
                     <a href="{{ route('beranda') }}" style="display: block; padding: 0.3rem 0;">Jelajahi Barang</a>
                     <a href="{{ route('beranda', ['baru' => 1]) }}" style="display: block; padding: 0.3rem 0;">Baru Ditambahkan</a>
                     <a href="{{ route('wishlist.index') }}" style="display: block; padding: 0.3rem 0;">Wishlist</a>
-                    <a href="{{ route('tentang') }}" style="display: block; padding: 0.3rem 0;">Tentang Barantau</a>
+                    <a href="{{ route('tentang') }}" style="display: block; padding: 0.3rem 0;">Tentang BARANTAU</a>
                 </div>
                 <div style="font-size: 0.875rem;">
                     <p style="margin-bottom: 0.75rem; font-weight: 700;">Akun &amp; Penjualan</p>
@@ -393,7 +388,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; {{ date('Y') }} BARANTAU &mdash; Marketplace Barang Bekas</p>
-                <p>Lokasi aman hanya sampai tingkat kecamatan.</p>
             </div>
         </div>
     </footer>
@@ -437,15 +431,13 @@
             const isDark = theme === 'dark';
             const buttons = document.querySelectorAll('.theme-toggle-btn');
             buttons.forEach(function (btn) {
-                btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-                btn.setAttribute('aria-label', isDark ? 'Alihkan ke mode terang' : 'Alihkan ke mode gelap');
+                btn.setAttribute('aria-checked', isDark ? 'true' : 'false');
+                btn.setAttribute('aria-label', isDark
+                    ? 'Mode Gelap, klik untuk beralih ke mode terang'
+                    : 'Mode Terang, klik untuk beralih ke mode gelap');
                 const labelEl = btn.querySelector('[data-theme-label]');
                 if (labelEl) {
-                    labelEl.textContent = isDark ? 'Beralih ke Mode Terang' : 'Beralih ke Mode Gelap';
-                }
-                const statusEl = btn.querySelector('[data-theme-status]');
-                if (statusEl) {
-                    statusEl.textContent = isDark ? 'Aktif: Gelap' : 'Aktif: Terang';
+                    labelEl.textContent = isDark ? 'Mode Gelap' : 'Mode Terang';
                 }
             });
         }
@@ -479,10 +471,29 @@
             return true;
         }
 
-        // Inisialisasi status tombol tema & pencarian wilayah (kecamatan)
+        // Inisialisasi status tombol tema, kotak upload gambar, & pencarian wilayah (kecamatan)
         document.addEventListener('DOMContentLoaded', function () {
             const initialTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
             syncThemeToggleControls(initialTheme);
+
+            document.querySelectorAll('[data-image-upload-box]').forEach(function (box) {
+                const input = box.querySelector('input[type="file"]');
+                const nameEl = box.querySelector('[data-upload-filename]');
+                if (!input || !nameEl) return;
+
+                input.addEventListener('change', function () {
+                    const files = input.files;
+                    if (!files || files.length === 0) {
+                        box.classList.remove('has-file');
+                        nameEl.textContent = '';
+                        return;
+                    }
+                    box.classList.add('has-file');
+                    nameEl.textContent = files.length === 1
+                        ? files[0].name
+                        : files.length + ' gambar dipilih';
+                });
+            });
 
             const selects = document.querySelectorAll('select[data-searchable-wilayah]');
             selects.forEach(function (selectEl) {

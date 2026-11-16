@@ -4,12 +4,6 @@
 @section('description', 'Perbarui informasi profil, username, foto profil, dan bio Anda.')
 
 @section('content')
-    <div class="auth-wrapper" style="max-width: 600px;">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Pengaturan Akun
-        </div>
-
         <div class="auth-header">
             <h1>Edit Profil</h1>
             <p>Atur username, foto profil, dan bio yang akan ditampilkan pada halaman profil penjual Anda.</p>
@@ -28,19 +22,27 @@
                             <span>{{ $user->inisial() }}</span>
                         @endif
                     </div>
-
                     <div style="flex: 1;">
                         <label for="foto_profil" style="display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.45rem;">
                             Foto Profil
                         </label>
-                        <input
-                            type="file"
-                            id="foto_profil"
-                            name="foto_profil"
-                            class="form-control"
-                            accept="image/jpeg,image/png,image/webp"
-                            style="padding: 0.55rem;"
-                        >
+                        <div class="image-upload-box" data-image-upload-box>
+                            <input
+                                type="file"
+                                id="foto_profil"
+                                name="foto_profil"
+                                class="image-upload-input"
+                                accept="image/jpeg,image/png,image/webp"
+                            >
+                            <span class="image-upload-arrow" aria-hidden="true">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 4v13"/>
+                                    <path d="m6 12 6 6 6-6"/>
+                                </svg>
+                            </span>
+                            <span class="image-upload-title">Pilih Gambar</span>
+                            <span class="image-upload-filename" data-upload-filename></span>
+                        </div>
                         @error('foto_profil')
                             <span class="text-error" role="alert">{{ $message }}</span>
                         @enderror
@@ -76,7 +78,6 @@
                     @error('username')
                         <span class="text-error" role="alert">{{ $message }}</span>
                     @enderror
-                    <div class="helper-text">Tautan profil publik Anda: <code>/penjual/{{ $user->username }}</code></div>
                 </div>
 
                 <div class="form-group">

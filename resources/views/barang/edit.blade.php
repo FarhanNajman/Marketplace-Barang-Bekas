@@ -4,12 +4,6 @@
 @section('description', 'Edit informasi, foto, atau status barang di Barantau.')
 
 @section('content')
-    <div class="auth-wrapper">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Kelola Listing Milikmu
-        </div>
-
         <header class="auth-header">
             <h1>Edit Barang &amp; Status</h1>
             <p>
@@ -231,14 +225,24 @@
                 <!-- Tambah Foto Baru -->
                 <div class="form-group" style="margin-top: 1.5rem;">
                     <label for="foto_baru">Tambah Foto Baru <span class="badge-optional">Opsional</span></label>
-                    <input
-                        type="file"
-                        id="foto_baru"
-                        name="foto_baru[]"
-                        class="form-control"
-                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-                        multiple
-                    >
+                    <div class="image-upload-box" data-image-upload-box>
+                        <input
+                            type="file"
+                            id="foto_baru"
+                            name="foto_baru[]"
+                            class="image-upload-input"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                            multiple
+                        >
+                        <span class="image-upload-arrow" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 4v13"/>
+                                <path d="m6 12 6 6 6-6"/>
+                            </svg>
+                        </span>
+                        <span class="image-upload-title">Pilih Gambar</span>
+                        <span class="image-upload-filename" data-upload-filename></span>
+                    </div>
                     <span class="helper-text">
                         Kosongkan jika tidak ingin menambah foto baru. Total foto per barang maksimal 5 foto (JPG, JPEG, PNG, WEBP, maks. 2MB per foto).
                     </span>

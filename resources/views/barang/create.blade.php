@@ -4,17 +4,8 @@
 @section('description', 'Jual barang bekas layak pakai di BARANTAU.')
 
 @section('content')
-    <div class="auth-wrapper">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Listing Barang Baru
-        </div>
-
         <header class="auth-header">
             <h1>Jual Barang</h1>
-            <p>
-                Satu listing mewakili satu barang fisik. Isi informasi barang secara jujur dan jelas, lalu unggah foto barang terbaikmu. Status awal barang otomatis menjadi <strong>Tersedia</strong>.
-            </p>
         </header>
 
         @if ($errors->any())
@@ -53,7 +44,7 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="nama_barang">Nama Barang *</label>
+                    <label for="nama_barang">Nama Barang</label>
                     <input
                         type="text"
                         id="nama_barang"
@@ -70,9 +61,9 @@
 
                 <div class="form-row-two">
                     <div class="form-group">
-                        <label for="kategori_id">Kategori *</label>
+                        <label for="kategori_id">Kategori</label>
                         <select id="kategori_id" name="kategori_id" class="form-control" required>
-                            <option value="">-- Pilih Kategori --</option>
+                            <option value="">Pilih Kategori</option>
                             @foreach ($kategoriList as $kat)
                                 <option value="{{ $kat->id }}" {{ (int) old('kategori_id') === $kat->id ? 'selected' : '' }}>
                                     {{ $kat->nama_kategori }}
@@ -85,9 +76,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="kondisi">Kondisi Barang *</label>
+                        <label for="kondisi">Kondisi Barang</label>
                         <select id="kondisi" name="kondisi" class="form-control" required>
-                            <option value="">-- Pilih Kondisi Barang --</option>
+                            <option value="">Pilih Kondisi Barang</option>
                             @foreach ($pilihanKondisi as $opsiKondisi)
                                 <option value="{{ $opsiKondisi }}" {{ old('kondisi') === $opsiKondisi ? 'selected' : '' }}>
                                     {{ $opsiKondisi }}
@@ -102,7 +93,7 @@
 
                 <div class="form-row-two">
                     <div class="form-group">
-                        <label for="harga">Harga (Rupiah) *</label>
+                        <label for="harga">Harga (Rupiah)</label>
                         <input
                             type="number"
                             id="harga"
@@ -113,14 +104,13 @@
                             step="1"
                             required
                         >
-                        <span class="helper-text">Masukkan angka bulat lebih dari 0 tanpa titik atau koma (misal: <code>150000</code> untuk Rp150.000).</span>
                         @error('harga')
                             <span class="text-error">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="kecamatan_id">Kecamatan Lokasi Barang *</label>
+                        <label for="kecamatan_id">Kecamatan Lokasi Barang</label>
                         <select
                             id="kecamatan_id"
                             name="kecamatan_id"
@@ -144,7 +134,6 @@
                                 @endforeach
                             @endif
                         </select>
-                        <span class="helper-text">Ketik untuk mencari kecamatan dengan cepat. Demi privasi, hanya tingkat kecamatan yang ditampilkan ke publik.</span>
                         @error('kecamatan_id')
                             <span class="text-error">{{ $message }}</span>
                         @enderror
@@ -152,7 +141,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi Barang *</label>
+                    <label for="deskripsi">Deskripsi Barang</label>
                     <textarea
                         id="deskripsi"
                         name="deskripsi"
@@ -160,23 +149,32 @@
                         class="form-control"
                         required
                     >{{ old('deskripsi') }}</textarea>
-                    <span class="helper-text">Jelaskan kondisi fisik, kelengkapan, lama pemakaian, dan alasan dijual. Jangan cantumkan alamat rumah lengkap demi privasi Anda.</span>
                     @error('deskripsi')
                         <span class="text-error">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="foto">Foto Barang (1–5 Foto) *</label>
-                    <input
-                        type="file"
-                        id="foto"
-                        name="foto[]"
-                        class="form-control"
-                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-                        multiple
-                        required
-                    >
+                    <label for="foto">Foto Barang (1–5 Foto)</label>
+                    <div class="image-upload-box" data-image-upload-box>
+                        <input
+                            type="file"
+                            id="foto"
+                            name="foto[]"
+                            class="image-upload-input"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                            multiple
+                            required
+                        >
+                        <span class="image-upload-arrow" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 4v13"/>
+                                <path d="m6 12 6 6 6-6"/>
+                            </svg>
+                        </span>
+                        <span class="image-upload-title">Pilih Gambar</span>
+                        <span class="image-upload-filename" data-upload-filename></span>
+                    </div>
                     <span class="helper-text">
                         Anda dapat memilih 1 hingga 5 foto sekaligus. Format yang didukung: <strong>JPG, JPEG, PNG, WEBP</strong> (maksimal 2MB per foto). Foto pertama akan menjadi foto sampul utama.
                     </span>

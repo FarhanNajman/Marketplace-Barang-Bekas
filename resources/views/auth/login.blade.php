@@ -5,10 +5,6 @@
 
 @section('content')
     <div class="auth-wrapper" style="max-width: 500px;">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Autentikasi Akun
-        </div>
         <div class="auth-header">
             <h1>Masuk ke Akun</h1>
             <p>Gunakan Username, Nomor HP, atau Email Anda untuk melanjutkan.</p>

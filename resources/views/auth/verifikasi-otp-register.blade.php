@@ -5,11 +5,6 @@
 
 @section('content')
     <div class="auth-wrapper" style="max-width: 520px;">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Aktivasi Akun Baru
-        </div>
-
         <div class="auth-header">
             <h1>Verifikasi Nomor HP</h1>
             <p>Masukkan 6 digit kode OTP untuk memverifikasi nomor HP dan mengaktifkan akun Anda.</p>

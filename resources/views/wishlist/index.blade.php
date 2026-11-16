@@ -10,11 +10,6 @@
         </div>
     @endif
 
-    <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Barang Tersimpan
-    </div>
-
     <div class="listings-header" style="margin-bottom: 2.5rem;">
         <div>
             <h1 class="section-heading">Wishlist Saya ({{ $items->count() }})</h1>

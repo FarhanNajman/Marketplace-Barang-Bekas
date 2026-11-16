@@ -5,10 +5,6 @@
 
 @section('content')
     <div class="auth-wrapper" style="max-width: 560px;">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Mulai Jual &amp; Beli
-        </div>
         <div class="auth-header">
             <h1>Daftar Akun Baru</h1>
             <p>Satu akun dapat digunakan untuk membeli sekaligus menjual barang bekas berkualitas.</p>

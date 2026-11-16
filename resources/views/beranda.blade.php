@@ -46,14 +46,14 @@
                         <div class="hero-stack-card pos-1" data-step="02">
                             <span class="hero-step-corner">02</span>
                             <img
-                                src="{{ asset('Assets/Beranda/CHAT.png') }}"
+                                src="{{ asset('Assets/Beranda/CHAT.jpg') }}"
                                 alt="Alur 02: Chat Penjual Secara Langsung"
                             >
                         </div>
                         <div class="hero-stack-card pos-2" data-step="03">
                             <span class="hero-step-corner">03</span>
                             <img
-                                src="{{ asset('Assets/Beranda/DEAL.webp') }}"
+                                src="{{ asset('Assets/Beranda/DEAL.jpg') }}"
                                 alt="Alur 03: Bertemu untuk COD di Tempat Aman"
                             >
                         </div>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="carousel-illustration" style="padding: 0; overflow: hidden;">
                             <img
-                                src="{{ asset('Assets/Beranda/CHAT.png') }}"
+                                src="{{ asset('Assets/Beranda/CHAT.jpg') }}"
                                 alt="Ilustrasi Chat Penjual"
                                 style="width: 100%; height: 100%; object-fit: cover;"
                             >
@@ -136,7 +136,7 @@
                         </div>
                         <div class="carousel-illustration" style="padding: 0; overflow: hidden;">
                             <img
-                                src="{{ asset('Assets/Beranda/DEAL.webp') }}"
+                                src="{{ asset('Assets/Beranda/DEAL.jpg') }}"
                                 alt="Ilustrasi Bertemu untuk COD"
                                 style="width: 100%; height: 100%; object-fit: cover;"
                             >

@@ -5,10 +5,6 @@
 
 @section('content')
     <div class="auth-wrapper">
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Pemulihan Akun
-        </div>
         <div class="auth-header">
             <h1>Lupa Password</h1>
             <p>Pilih metode pemulihan akun Anda melalui Nomor HP terverifikasi atau Email terverifikasi.</p>

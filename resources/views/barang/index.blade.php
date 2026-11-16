@@ -49,11 +49,6 @@
         <section class="compact-hero-section" aria-label="Pengenalan Barantau">
             <div class="site-container compact-hero-grid">
                 <div>
-                    <div class="eyebrow" style="margin-bottom: 0.65rem;">
-                        <span class="eyebrow-dot"></span>
-                        Marketplace Barang Bekas Lokal
-                    </div>
-
                     <h1 class="compact-hero-title">
                         Barang baik,<br>
                         <span class="hero-title-italic">hidup lagi.</span>
@@ -79,14 +74,14 @@
                             <div class="hero-stack-card pos-1" data-step="02">
                                 <span class="hero-step-corner">02</span>
                                 <img
-                                    src="{{ asset('Assets/Beranda/CHAT.png') }}"
+                                    src="{{ asset('Assets/Beranda/CHAT.jpg') }}"
                                     alt="Alur 02: Chat Penjual Secara Langsung"
                                 >
                             </div>
                             <div class="hero-stack-card pos-2" data-step="03">
                                 <span class="hero-step-corner">03</span>
                                 <img
-                                    src="{{ asset('Assets/Beranda/DEAL.webp') }}"
+                                    src="{{ asset('Assets/Beranda/DEAL.jpg') }}"
                                     alt="Alur 03: Bertemu untuk COD di Tempat Aman"
                                 >
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Tentang')
-@section('description', 'Tentang BarangRantau / BalikPakai — Marketplace barang bekas lokal.')
+@section('description', 'Tentang BARANTAU — Marketplace barang bekas lokal.')
 
 @section('fullbleed')
     <div class="site-container page-section" style="padding-bottom: 3.5rem;">
@@ -13,19 +13,13 @@
                 class="btn-back-barantau"
                 id="btn-kembali-tentang"
                 aria-label="Kembali ke halaman sebelumnya"
+                title="Kembali"
             >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-                <span>Kembali</span>
             </a>
         </div>
-
-        <div class="auth-wrapper">
-            <div class="eyebrow">
-                <span class="eyebrow-dot"></span>
-                Tentang Platform
-            </div>
 
             <div class="auth-header">
                 <h1>
@@ -33,7 +27,7 @@
                     <span class="hero-title-italic">lebih panjang guna.</span>
                 </h1>
                 <p>
-                    BarangRantau (BalikPakai) mempertemukan penjual dan pembeli barang bekas layak pakai di tingkat kecamatan agar transaksi lebih dekat, aman, dan ramah lingkungan.
+                    BarangRantau mempertemukan penjual dan pembeli barang bekas layak pakai di tingkat kecamatan agar transaksi lebih dekat, aman, dan ramah lingkungan.
                 </p>
             </div>
 
@@ -109,7 +103,7 @@
                         </div>
                         <div class="carousel-illustration" style="padding: 0; overflow: hidden;">
                             <img
-                                src="{{ asset('Assets/Beranda/CHAT.png') }}"
+                                src="{{ asset('Assets/Beranda/CHAT.jpg') }}"
                                 alt="Ilustrasi Chat Penjual"
                                 style="width: 100%; height: 100%; object-fit: cover;"
                             >
@@ -130,7 +124,7 @@
                         </div>
                         <div class="carousel-illustration" style="padding: 0; overflow: hidden;">
                             <img
-                                src="{{ asset('Assets/Beranda/DEAL.webp') }}"
+                                src="{{ asset('Assets/Beranda/DEAL.jpg') }}"
                                 alt="Ilustrasi Bertemu untuk COD"
                                 style="width: 100%; height: 100%; object-fit: cover;"
                             >
