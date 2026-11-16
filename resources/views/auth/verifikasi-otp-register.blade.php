@@ -56,7 +56,6 @@
                         class="form-control"
                         maxlength="6"
                         inputmode="numeric"
-                        placeholder="123456"
                         required
                         autofocus
                     >

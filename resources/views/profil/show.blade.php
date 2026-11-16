@@ -10,10 +10,6 @@
         </div>
     @endif
 
-    <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Profil &amp; Listing Penjual
-    </div>
 
     <section class="profile-banner" aria-labelledby="profile-heading">
         <div class="profile-avatar">
@@ -30,7 +26,6 @@
             <p class="profile-bio">
                 {{ $penjual->bio ?: 'Belum ada bio yang ditambahkan.' }}
             </p>
-
             <div class="profile-stats">
                 <div>
                     <span class="profile-stat-count">{{ $barangTersedia->count() }}</span>
@@ -43,9 +38,12 @@
             </div>
         </div>
 
-        <div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
             @auth
                 @if (auth()->id() === $penjual->id)
+                    <a href="{{ route('barang.create') }}" class="button-primary" id="btn-profil-pasang-barang">
+                        Jual Barang
+                    </a>
                     <a href="{{ route('profil.edit') }}" class="button-outline" id="btn-edit-profil">
                         Edit Profil
                     </a>
@@ -58,14 +56,11 @@
     <section id="section-barang-tersedia" style="margin-bottom: 5rem;" aria-labelledby="heading-tersedia">
         <div class="listings-header">
             <div>
-                <p class="section-tag">Masih Bisa Dibeli</p>
                 <h2 id="heading-tersedia" class="section-heading">
                     Barang Tersedia ({{ $barangTersedia->count() }})
                 </h2>
             </div>
-            <p class="listings-note">
-                Daftar barang milik {{ '@' . $penjual->username }} yang saat ini masih tersedia.
-            </p>
+    
         </div>
 
         @if ($barangTersedia->isNotEmpty())
@@ -96,7 +91,7 @@
                                 </h3>
                                 <p class="product-price">{{ $barang->hargaRupiah() }}</p>
                             </div>
-                            <p class="product-category">
+                            <p class="product-category" style="margin-bottom: 0.45rem;">
                                 {{ $barang->kategori?->nama_kategori ?? 'Umum' }} &bull; {{ $barang->kondisi }}
                             </p>
                             <p class="product-location">
@@ -112,12 +107,10 @@
             </div>
         @else
             <div class="empty-listing-box">
-                <p class="font-display" style="font-size: 1.35rem; font-weight: 600; color: var(--text);">
+                <p class="font-display" style="font-size: 1.15rem; font-weight: 550; color: var(--text);">
                     Belum ada barang tersedia.
                 </p>
-                <p style="margin-top: 0.35rem; font-size: 0.9rem;">
-                    Penjual ini belum memiliki barang yang sedang dijual saat ini.
-                </p>
+                
             </div>
         @endif
     </section>
@@ -126,14 +119,11 @@
     <section id="section-barang-terjual" aria-labelledby="heading-terjual">
         <div class="listings-header">
             <div>
-                <p class="section-tag" style="color: var(--muted);">Riwayat Penjualan</p>
                 <h2 id="heading-terjual" class="section-heading">
                     Barang Terjual ({{ $barangTerjual->count() }})
                 </h2>
             </div>
-            <p class="listings-note">
-                Barang milik {{ '@' . $penjual->username }} yang sudah laku terjual.
-            </p>
+        
         </div>
 
         @if ($barangTerjual->isNotEmpty())
@@ -158,9 +148,12 @@
                                 </h3>
                                 <p class="product-price">{{ $barang->hargaRupiah() }}</p>
                             </div>
-                            <p class="product-category">
+                            <p class="product-category" style="margin-bottom: 0.45rem;">
                                 {{ $barang->kategori?->nama_kategori ?? 'Umum' }} &bull; {{ $barang->kondisi }}
                             </p>
+                            <div class="product-meta-badges" style="margin-bottom: 0.35rem;">
+                                <span class="card-status-tag sold">Terjual</span>
+                            </div>
                             <p class="product-location">
                                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                     <path d="M15.5 8.2c0 4.2-5.5 8.1-5.5 8.1S4.5 12.4 4.5 8.2a5.5 5.5 0 1 1 11 0Z" stroke="currentColor" stroke-width="1.4" />
@@ -174,12 +167,10 @@
             </div>
         @else
             <div class="empty-listing-box">
-                <p class="font-display" style="font-size: 1.35rem; font-weight: 600; color: var(--text);">
+                <p class="font-display" style="font-size: 1.15rem; font-weight: 550; color: var(--text);">
                     Belum ada barang terjual.
                 </p>
-                <p style="margin-top: 0.35rem; font-size: 0.9rem;">
-                    Riwayat barang yang sudah terjual akan tampil di bagian ini.
-                </p>
+                
             </div>
         @endif
     </section>

@@ -8,11 +8,22 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+// Halaman Utama langsung menampilkan Katalog Barang (tanpa beranda promosi terpisah)
+Route::get('/', [BarangController::class, 'index'])->name('beranda');
+Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 Route::view('/tentang', 'tentang')->name('tentang');
 
-// Halaman Daftar Barang & Detail Barang
-Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+// Manajemen Listing Barang (Hanya untuk pengguna yang sudah login)
+Route::middleware('auth')->group(function () {
+    Route::get('/barang/tambah', [BarangController::class, 'create'])->name('barang.create');
+    Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+    Route::get('/barang/{barang}/edit', [BarangController::class, 'edit'])->name('barang.edit');
+    Route::put('/barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
+    Route::patch('/barang/{barang}/status', [BarangController::class, 'updateStatus'])->name('barang.update-status');
+    Route::delete('/barang/{barang}', [BarangController::class, 'destroy'])->name('barang.destroy');
+});
+
+// Halaman Detail Barang (Publik — diletakkan setelah /barang/tambah agar tidak tertangkap wildcard)
 Route::get('/barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
 
 // Fitur Wishlist (Hanya untuk pengguna yang sudah login)
@@ -70,4 +81,3 @@ Route::get('/reset-password/{token}', [LupaPasswordController::class, 'showReset
 
 Route::post('/reset-password', [LupaPasswordController::class, 'resetWithEmailToken'])
     ->name('password.update');
-

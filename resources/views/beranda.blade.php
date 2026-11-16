@@ -11,11 +11,6 @@
             </div>
         @endif
 
-        <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Marketplace barang bekas lokal
-        </div>
-
         <div class="hero-grid">
             <div>
                 <h1 class="hero-title">
@@ -28,7 +23,7 @@
                         Temukan barang layak pakai di sekitarmu. Lebih hemat, lebih dekat, dan lebih panjang umur pakainya.
                     </p>
                     <a href="{{ route('barang.index') }}" class="hero-cta-link" id="btn-jelajahi-hero">
-                        Mulai cari barang
+                        Jelajahi Barang
                         <span class="circle-arrow">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.8" />
@@ -79,7 +74,7 @@
                     </h2>
                 </div>
                 <p style="max-width: 26rem; font-size: 0.875rem; line-height: 1.55; color: rgba(243,238,227,0.65);">
-                    Tiga langkah sederhana bertransaksi aman secara langsung di kecamatan terdekatmu.
+                    Tiga langkah sederhana bertransaksi aman secara langsung.
                 </p>
             </div>
 

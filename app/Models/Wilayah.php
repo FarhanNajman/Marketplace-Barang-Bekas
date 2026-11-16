@@ -30,5 +30,18 @@ class Wilayah extends Model
 
         return $this->nama_wilayah;
     }
+
+    public function namaProvinsi(): ?string
+    {
+        if ($this->jenis_wilayah === 'kecamatan') {
+            return $this->induk?->induk?->nama_wilayah;
+        }
+
+        if ($this->jenis_wilayah === 'kabupaten_kota') {
+            return $this->induk?->nama_wilayah;
+        }
+
+        return $this->nama_wilayah;
+    }
 }
 

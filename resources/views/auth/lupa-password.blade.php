@@ -36,7 +36,6 @@
                             name="no_hp"
                             class="form-control"
                             value="{{ old('no_hp') }}"
-                            placeholder="Contoh: 081234567890"
                             required
                         >
                         @error('no_hp')
@@ -69,7 +68,6 @@
                             name="email"
                             class="form-control"
                             value="{{ old('email') }}"
-                            placeholder="nama@email.com"
                             required
                         >
                         @error('email')

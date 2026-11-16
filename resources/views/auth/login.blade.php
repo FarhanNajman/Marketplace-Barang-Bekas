@@ -38,7 +38,6 @@
                         name="identitas"
                         class="form-control"
                         value="{{ old('identitas') }}"
-                        placeholder="Masukkan username, no. HP, atau email"
                         required
                         autofocus
                     >
@@ -59,7 +58,6 @@
                         id="password"
                         name="password"
                         class="form-control"
-                        placeholder="Masukkan password Anda"
                         required
                     >
                     @error('password')

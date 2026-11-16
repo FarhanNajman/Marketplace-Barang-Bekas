@@ -51,7 +51,6 @@
                         class="form-control"
                         maxlength="6"
                         inputmode="numeric"
-                        placeholder="123456"
                         required
                     >
                     @error('otp')
@@ -67,9 +66,9 @@
                         id="password"
                         name="password"
                         class="form-control"
-                        placeholder="Minimal 8 karakter"
                         required
                     >
+                    <div class="helper-text">Minimal 8 karakter.</div>
                     @error('password')
                         <span class="text-error" role="alert">{{ $message }}</span>
                     @enderror
@@ -82,7 +81,6 @@
                         id="password_confirmation"
                         name="password_confirmation"
                         class="form-control"
-                        placeholder="Ulangi password baru"
                         required
                     >
                 </div>

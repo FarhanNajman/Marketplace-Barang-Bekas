@@ -86,7 +86,6 @@
                         name="bio"
                         rows="4"
                         class="form-control"
-                        placeholder="Ceritakan sedikit tentang diri Anda atau barang yang Anda jual..."
                     >{{ old('bio', $user->bio) }}</textarea>
                     @error('bio')
                         <span class="text-error" role="alert">{{ $message }}</span>

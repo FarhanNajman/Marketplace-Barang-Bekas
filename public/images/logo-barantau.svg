@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140" role="img" aria-label="BARANTAU Wordmark Logo">
+  <defs>
+    <!-- Bentuk utuh huruf R modern geometris -->
+    <path
+      id="glyph-R"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M184 34 H217 C231.5 34 241 42.2 241 55 C241 64.2 235.4 71.2 226.2 74.1 L242 106 H223.8 L210.2 76 H200 V106 H184 V34 Z M200 47.5 V63.5 H215.2 C221.6 63.5 225.2 60.2 225.2 55.5 C225.2 50.8 221.6 47.5 215.2 47.5 H200 Z"
+    />
+    <!-- Clip diagonal (silang miring) bagian kiri-bawah huruf R (#111111) -->
+    <clipPath id="clip-r-diag-left">
+      <polygon points="175,25 196,25 250,115 175,115" />
+    </clipPath>
+    <!-- Clip diagonal (silang miring) bagian kanan-atas huruf R (#D9541E) -->
+    <clipPath id="clip-r-diag-right">
+      <polygon points="195.5,25 255,25 255,115 249.5,115" />
+    </clipPath>
+  </defs>
+
+  <!-- Latar krem identitas Barantau (#F3EEE3) -->
+  <rect width="640" height="140" rx="16" fill="#F3EEE3" />
+
+  <!-- Huruf B (#111111) -->
+  <path
+    fill="#111111"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M48 34 H81 C94.2 34 102.5 40.8 102.5 51.2 C102.5 58.2 98.4 63.6 91.8 66.2 C99.8 68.7 104.5 74.8 104.5 83.5 C104.5 95.2 95.5 106 81.5 106 H48 V34 Z M64 46.5 V61.5 H78.5 C84.2 61.5 87.5 58.6 87.5 54 C87.5 49.4 84.2 46.5 78.5 46.5 H64 Z M64 73.5 V93 H80 C86.2 93 89.5 89.8 89.5 83.2 C89.5 76.8 86.2 73.5 80 73.5 H64 Z"
+  />
+
+  <!-- Huruf A pertama (#111111) -->
+  <path
+    fill="#111111"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M135 34 H152 L177 106 H160.2 L155.2 90 H131.8 L126.8 106 H110 L135 34 Z M135.8 77 H151.2 L143.5 51.5 L135.8 77 Z"
+  />
+
+  <!-- Huruf R: Terbagi Silang Miring (#111111 ke #D9541E) -->
+  <use href="#glyph-R" fill="#111111" clip-path="url(#clip-r-diag-left)" />
+  <use href="#glyph-R" fill="#D9541E" clip-path="url(#clip-r-diag-right)" />
+
+  <!-- Huruf A kedua (#D9541E) -->
+  <path
+    fill="#D9541E"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M273 34 H290 L315 106 H298.2 L293.2 90 H269.8 L264.8 106 H248 L273 34 Z M273.8 77 H289.2 L281.5 51.5 L273.8 77 Z"
+  />
+
+  <!-- Huruf N (#D9541E) -->
+  <path
+    fill="#D9541E"
+    d="M323 34 H338.5 L368 80 V34 H383.5 V106 H368 L338.5 60 V106 H323 V34 Z"
+  />
+
+  <!-- Huruf T (#D9541E) -->
+  <path
+    fill="#D9541E"
+    d="M393 34 H451 V48 H430 V106 H414 V48 H393 V34 Z"
+  />
+
+  <!-- Huruf A ketiga (#D9541E) -->
+  <path
+    fill="#D9541E"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M476 34 H493 L518 106 H501.2 L496.2 90 H472.8 L467.8 106 H451 L476 34 Z M476.8 77 H492.2 L484.5 51.5 L476.8 77 Z"
+  />
+
+  <!-- Huruf U (#D9541E) -->
+  <path
+    fill="#D9541E"
+    d="M527 34 H543 V77.5 C543 87.2 548.5 93 557.5 93 C566.5 93 572 87.2 572 77.5 V34 H588 V78.5 C588 96.2 576.2 107.2 557.5 107.2 C538.8 107.2 527 96.2 527 78.5 V34 Z"
+  />
+</svg>

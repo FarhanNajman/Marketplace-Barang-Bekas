@@ -83,9 +83,15 @@
                             <p class="product-price">{{ $barang->hargaRupiah() }}</p>
                         </div>
 
-                        <p class="product-category">
-                            {{ $namaKategori }} &bull; {{ $barang->kondisi }} &bull; Status: {{ ucfirst($barang->status) }}
+                        <p class="product-category" style="margin-bottom: 0.45rem;">
+                            {{ $namaKategori }} &bull; {{ $barang->kondisi }}
                         </p>
+
+                        @if ($barang->status === 'terjual')
+                            <div class="product-meta-badges" style="margin-bottom: 0.35rem;">
+                                <span class="card-status-tag sold">Terjual</span>
+                            </div>
+                        @endif
 
                         <p class="product-location">
                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -118,9 +124,7 @@
                 Wishlist Anda masih kosong.
             </p>
             <p style="margin-top: 0.45rem; margin-bottom: 1.25rem;">
-                Tekan ikon hati pada barang yang Anda sukai di halaman Daftar Barang untuk menyimpannya ke sini.
-            </p>
-            <a href="{{ route('barang.index') }}" class="button-primary">
+                            <a href="{{ route('barang.index') }}" class="button-primary">
                 Jelajahi Barang Sekarang
             </a>
         </div>

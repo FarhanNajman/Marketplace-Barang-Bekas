@@ -26,7 +26,6 @@
                         name="name"
                         class="form-control"
                         value="{{ old('name') }}"
-                        placeholder="Masukkan nama lengkap Anda"
                         required
                         autofocus
                     >
@@ -43,7 +42,6 @@
                         name="username"
                         class="form-control"
                         value="{{ old('username') }}"
-                        placeholder="Contoh: budi_santoso"
                         required
                     >
                     @error('username')
@@ -59,7 +57,6 @@
                         name="no_hp"
                         class="form-control"
                         value="{{ old('no_hp') }}"
-                        placeholder="Contoh: 081234567890"
                         required
                     >
                     @error('no_hp')
@@ -79,7 +76,6 @@
                         name="email"
                         class="form-control"
                         value="{{ old('email') }}"
-                        placeholder="nama@email.com (boleh dikosongkan)"
                     >
                     @error('email')
                         <span class="text-error" role="alert">{{ $message }}</span>
@@ -94,9 +90,9 @@
                         id="password"
                         name="password"
                         class="form-control"
-                        placeholder="Minimal 8 karakter"
                         required
                     >
+                    <div class="helper-text">Minimal 8 karakter.</div>
                     @error('password')
                         <span class="text-error" role="alert">{{ $message }}</span>
                     @enderror
@@ -109,7 +105,6 @@
                         id="password_confirmation"
                         name="password_confirmation"
                         class="form-control"
-                        placeholder="Ulangi password Anda"
                         required
                     >
                 </div>
