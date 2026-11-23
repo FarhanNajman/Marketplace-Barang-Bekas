@@ -39,6 +39,7 @@
         $navKecamatanId = $kecamatanId ?? request('kecamatan_id');
         $navStatusFilter = $statusFilter ?? request('status', '');
         $navBaruFilter = $hanyaBaruDitambahkan ?? in_array((string) request('baru', ''), ['1', 'true'], true);
+        $navUrutkan = $urutkan ?? request('urutkan', 'terbaru');
 
         $isHalamanKatalogUtama = request()->routeIs('beranda', 'barang.index');
 
@@ -207,6 +208,9 @@
                     @endif
                     @if ($navBaruFilter)
                         <input type="hidden" name="baru" value="1">
+                    @endif
+                    @if ($navUrutkan && $navUrutkan !== 'terbaru')
+                        <input type="hidden" name="urutkan" value="{{ $navUrutkan }}">
                     @endif
 
                     <div class="header-field-group">

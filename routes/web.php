@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 // Halaman Utama langsung menampilkan Katalog Barang (tanpa beranda promosi terpisah)
 Route::get('/', [BarangController::class, 'index'])->name('beranda');
 Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+Route::get('/wilayah/sub-wilayah', [BarangController::class, 'subWilayah'])->name('wilayah.sub');
 Route::view('/tentang', 'tentang')->name('tentang');
 
 // Manajemen Listing Barang (Hanya untuk pengguna yang sudah login)

@@ -9,6 +9,7 @@ use App\Models\Wilayah;
 use App\Models\Wishlist;
 use Database\Seeders\KategoriSeeder;
 use Database\Seeders\WilayahSeeder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,23 +42,86 @@ class BarangController extends Controller
      */
     public function index(Request $request): View
     {
+        if (Kategori::count() === 0) {
+            (new KategoriSeeder())->run();
+        }
+
+        if (Wilayah::count() === 0) {
+            (new WilayahSeeder())->run();
+        }
+
         $validated = $request->validate([
             'q' => ['nullable', 'string', 'max:100'],
             'kategori_id' => ['nullable', 'integer', 'exists:kategori,id'],
-            'kecamatan_id' => ['nullable', 'integer', 'exists:wilayah,id'],
+            'provinsi_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('wilayah', 'id')->where('jenis_wilayah', 'provinsi'),
+            ],
+            'kabupaten_kota_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('wilayah', 'id')->where('jenis_wilayah', 'kabupaten_kota'),
+            ],
+            'kecamatan_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('wilayah', 'id')->where('jenis_wilayah', 'kecamatan'),
+            ],
             'status' => ['nullable', 'string', Rule::in(['tersedia', 'terjual'])],
             'baru' => ['nullable', 'in:0,1,true'],
+            'urutkan' => ['nullable', 'string', Rule::in(['terbaru', 'terlama', 'harga_asc', 'harga_desc'])],
         ]);
 
         $kataKunci = isset($validated['q']) ? trim($validated['q']) : '';
-        $kategoriId = $validated['kategori_id'] ?? null;
-        $kecamatanId = $validated['kecamatan_id'] ?? null;
+        $kategoriId = isset($validated['kategori_id']) ? (int) $validated['kategori_id'] : null;
+        $provinsiId = isset($validated['provinsi_id']) ? (int) $validated['provinsi_id'] : null;
+        $kabupatenKotaId = isset($validated['kabupaten_kota_id']) ? (int) $validated['kabupaten_kota_id'] : null;
+        $kecamatanId = isset($validated['kecamatan_id']) ? (int) $validated['kecamatan_id'] : null;
         $statusFilter = $validated['status'] ?? '';
         $hanyaBaruDitambahkan = in_array((string) ($validated['baru'] ?? ''), ['1', 'true'], true);
+        $urutkan = $validated['urutkan'] ?? 'terbaru';
+
+        // Sinkronisasi hierarki wilayah bertingkat (Provinsi -> Kabupaten/Kota -> Kecamatan)
+        $kecamatanTerpilih = null;
+        $kabupatenTerpilih = null;
+        $provinsiTerpilih = null;
+
+        if ($kecamatanId) {
+            $kecamatanTerpilih = Wilayah::with('induk.induk')
+                ->where('jenis_wilayah', 'kecamatan')
+                ->find($kecamatanId);
+
+            if ($kecamatanTerpilih) {
+                $kabupatenTerpilih = $kecamatanTerpilih->induk;
+                $provinsiTerpilih = $kecamatanTerpilih->induk?->induk;
+                $kabupatenKotaId = $kabupatenTerpilih?->id;
+                $provinsiId = $provinsiTerpilih?->id;
+            }
+        } elseif ($kabupatenKotaId) {
+            $kabupatenTerpilih = Wilayah::with('induk')
+                ->where('jenis_wilayah', 'kabupaten_kota')
+                ->find($kabupatenKotaId);
+
+            if ($kabupatenTerpilih) {
+                if ($provinsiId && (int) $kabupatenTerpilih->id_induk !== $provinsiId) {
+                    // Jika pengguna mengganti provinsi dan kabupaten/kota lama tidak cocok, reset kabupaten/kota
+                    $kabupatenTerpilih = null;
+                    $kabupatenKotaId = null;
+                } else {
+                    $provinsiTerpilih = $kabupatenTerpilih->induk;
+                    $provinsiId = $provinsiTerpilih?->id;
+                }
+            }
+        }
+
+        if ($provinsiId && ! $provinsiTerpilih) {
+            $provinsiTerpilih = Wilayah::where('jenis_wilayah', 'provinsi')->find($provinsiId);
+        }
 
         // Model Barang menggunakan SoftDeletes, sehingga barang dengan deleted_at terisi
         // otomatis tidak diikutsertakan dalam query ini.
-        $query = Barang::with(['penjual', 'kategori', 'kecamatan.induk', 'fotoUtama', 'foto']);
+        $query = Barang::with(['penjual', 'kategori', 'kecamatan.induk.induk', 'fotoUtama', 'foto']);
 
         if ($kataKunci !== '') {
             $query->where('nama_barang', 'like', '%' . $kataKunci . '%');
@@ -69,6 +133,14 @@ class BarangController extends Controller
 
         if ($kecamatanId) {
             $query->where('kecamatan_id', $kecamatanId);
+        } elseif ($kabupatenKotaId) {
+            $query->whereHas('kecamatan', function ($q) use ($kabupatenKotaId) {
+                $q->where('id_induk', $kabupatenKotaId);
+            });
+        } elseif ($provinsiId) {
+            $query->whereHas('kecamatan.induk', function ($q) use ($provinsiId) {
+                $q->where('id_induk', $provinsiId);
+            });
         }
 
         if ($statusFilter !== '') {
@@ -76,29 +148,54 @@ class BarangController extends Controller
         }
 
         // Filter cepat "Baru ditambahkan": hanya menampilkan barang yang diposting dalam 2 hari terakhir.
-        // Pada tampilan katalog utama (default), seluruh barang tetap ditampilkan tanpa batas 2 hari.
         if ($hanyaBaruDitambahkan) {
             $query->where('created_at', '>=', now()->subDays(2));
         }
 
-        $daftarBarang = $query
-            ->orderByDesc('created_at')
-            ->orderByDesc('id')
-            ->get();
-
-        if (Kategori::count() === 0) {
-            (new KategoriSeeder())->run();
+        // Pengurutan hasil pencarian
+        switch ($urutkan) {
+            case 'harga_asc':
+                $query->orderBy('harga', 'asc')->orderByDesc('id');
+                break;
+            case 'harga_desc':
+                $query->orderBy('harga', 'desc')->orderByDesc('id');
+                break;
+            case 'terlama':
+                $query->orderBy('created_at', 'asc')->orderBy('id', 'asc');
+                break;
+            case 'terbaru':
+            default:
+                $query->orderByDesc('created_at')->orderByDesc('id');
+                break;
         }
 
-        if (Wilayah::count() === 0) {
-            (new WilayahSeeder())->run();
-        }
+        // Pertahankan seluruh query filter & urutan saat berpindah halaman hasil pencarian
+        $daftarBarang = $query->paginate(12)->withQueryString();
 
         $kategoriList = Kategori::orderBy('nama_kategori')->get();
         $kecamatanList = Wilayah::with('induk.induk')
             ->where('jenis_wilayah', 'kecamatan')
             ->orderBy('nama_wilayah')
             ->get();
+
+        // Daftar wilayah bertingkat dari tabel wilayah
+        $provinsiList = Wilayah::where('jenis_wilayah', 'provinsi')
+            ->orderBy('nama_wilayah')
+            ->get();
+
+        $kabupatenKotaList = $provinsiId
+            ? Wilayah::where('jenis_wilayah', 'kabupaten_kota')
+                ->where('id_induk', $provinsiId)
+                ->orderBy('nama_wilayah')
+                ->get()
+            : collect();
+
+        $kecamatanFilterList = $kabupatenKotaId
+            ? Wilayah::where('jenis_wilayah', 'kecamatan')
+                ->where('id_induk', $kabupatenKotaId)
+                ->orderBy('nama_wilayah')
+                ->get()
+            : collect();
 
         $wishlistBarangIds = [];
         if ($request->user()) {
@@ -111,12 +208,47 @@ class BarangController extends Controller
             'daftarBarang' => $daftarBarang,
             'kategoriList' => $kategoriList,
             'kecamatanList' => $kecamatanList,
+            'provinsiList' => $provinsiList,
+            'kabupatenKotaList' => $kabupatenKotaList,
+            'kecamatanFilterList' => $kecamatanFilterList,
             'kataKunci' => $kataKunci,
             'kategoriId' => $kategoriId,
+            'provinsiId' => $provinsiId,
+            'kabupatenKotaId' => $kabupatenKotaId,
             'kecamatanId' => $kecamatanId,
+            'provinsiTerpilih' => $provinsiTerpilih,
+            'kabupatenTerpilih' => $kabupatenTerpilih,
+            'kecamatanTerpilih' => $kecamatanTerpilih,
             'statusFilter' => $statusFilter,
             'hanyaBaruDitambahkan' => $hanyaBaruDitambahkan,
+            'urutkan' => $urutkan,
             'wishlistBarangIds' => $wishlistBarangIds,
+        ]);
+    }
+
+    /**
+     * Endpoint JSON untuk memuat daftar sub-wilayah bertingkat (Kabupaten/Kota berdasarkan Provinsi,
+     * atau Kecamatan berdasarkan Kabupaten/Kota) langsung dari tabel wilayah.
+     */
+    public function subWilayah(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'id_induk' => ['required', 'integer', 'exists:wilayah,id'],
+            'jenis_wilayah' => ['nullable', 'string', Rule::in(['kabupaten_kota', 'kecamatan'])],
+        ]);
+
+        $query = Wilayah::where('id_induk', (int) $validated['id_induk']);
+
+        if (! empty($validated['jenis_wilayah'])) {
+            $query->where('jenis_wilayah', $validated['jenis_wilayah']);
+        }
+
+        $items = $query
+            ->orderBy('nama_wilayah')
+            ->get(['id', 'nama_wilayah', 'jenis_wilayah', 'id_induk']);
+
+        return response()->json([
+            'data' => $items,
         ]);
     }
 
@@ -220,7 +352,7 @@ class BarangController extends Controller
      */
     public function show(Request $request, Barang $barang): View
     {
-        $barang->load(['penjual', 'kategori', 'kecamatan.induk', 'foto']);
+        $barang->load(['penjual', 'kategori', 'kecamatan.induk.induk', 'foto']);
 
         $dalamWishlist = false;
         if ($request->user()) {
