@@ -11,6 +11,12 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-error" role="alert" id="alert-error">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="page-back-bar" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
         <a
             href="{{ route('beranda') }}"
@@ -304,25 +310,52 @@
                 </p>
             @endif
 
-            <!-- Tindakan Barang: Jika Terjual, jangan tampilkan tombol chat/beli seolah masih tersedia -->
+            <!-- Tindakan Barang: Jika Terjual, jangan tampilkan tombol chat baru seolah masih tersedia, namun tetap izinkan buka riwayat chat yang sudah ada -->
             @if ($isTerjual)
                 <div class="detail-sold-notice" role="status">
                     <span class="status-pill sold">Terjual</span>
                     <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted);">
-                        Barang ini sudah <strong>terjual</strong> dan tidak lagi tersedia untuk ditawar atau dibeli.
+                        Barang ini sudah <strong>terjual</strong> dan tidak lagi tersedia untuk percakapan baru.
                     </p>
+                    @auth
+                        @if (!empty($roomChatSudahAda))
+                            <div style="margin-top: 0.85rem;">
+                                <a href="{{ route('chat.show', $roomChatSudahAda->id) }}" class="button-outline" id="btn-riwayat-chat-pembeli">
+                                    Lihat Riwayat Chat Sebelumnya
+                                </a>
+                            </div>
+                        @elseif (auth()->id() === $barang->user_id && ($jumlahRoomBarangIni ?? 0) > 0)
+                            <div style="margin-top: 0.85rem;">
+                                <a href="{{ route('chat.index') }}" class="button-outline" id="btn-riwayat-chat-penjual">
+                                    Lihat Riwayat Chat Pembeli ({{ $jumlahRoomBarangIni }})
+                                </a>
+                            </div>
+                        @endif
+                    @endauth
                 </div>
             @else
                 <div class="detail-actions">
-                    @if ($namaRouteChat)
-                        <a href="{{ route($namaRouteChat, $barang) }}" class="btn" id="btn-chat-penjual" style="flex: 1;">
-                            Chat Penjual
-                        </a>
+                    @auth
+                        @if (auth()->id() === $barang->user_id)
+                            <a href="{{ route('chat.index') }}" class="button-outline" id="btn-daftar-chat-penjual" style="flex: 1; padding: 0.85rem 1.25rem;">
+                                Lihat Chat Masuk{{ ($jumlahRoomBarangIni ?? 0) > 0 ? ' (' . $jumlahRoomBarangIni . ')' : '' }}
+                            </a>
+                        @else
+                            <form method="POST" action="{{ route('chat.mulai', $barang) }}" style="flex: 1; display: flex;">
+                                @csrf
+                                <button type="submit" class="btn" id="btn-chat-penjual" style="width: 100%;">
+                                    {{ !empty($roomChatSudahAda) ? 'Lanjutkan Chat Penjual' : 'Chat Penjual' }}
+                                </button>
+                            </form>
+                        @endif
                     @else
-                        <button type="button" class="btn-disabled" id="btn-chat-penjual-disabled" disabled title="Fitur chat akan hadir pada tahap berikutnya">
-                            Chat Penjual (Segera Hadir)
-                        </button>
-                    @endif
+                        <form method="POST" action="{{ route('chat.mulai', $barang) }}" style="flex: 1; display: flex;">
+                            @csrf
+                            <button type="submit" class="btn" id="btn-chat-penjual" style="width: 100%;">
+                                Chat Penjual
+                            </button>
+                        </form>
+                    @endauth
 
                     <form method="POST" action="{{ route('wishlist.toggle') }}">
                         @csrf
@@ -340,12 +373,6 @@
                         </button>
                     </form>
                 </div>
-
-                @if (! $namaRouteChat)
-                    <p class="helper-text" style="margin-top: 0.65rem;">
-                        Info: Fitur Chat Penjual belum diimplementasikan pada tahap ini.
-                    </p>
-                @endif
             @endif
         </div>
     </div>

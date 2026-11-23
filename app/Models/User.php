@@ -42,6 +42,21 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class, 'user_id');
     }
 
+    public function roomChatSebagaiPembeli(): HasMany
+    {
+        return $this->hasMany(RoomChat::class, 'pembeli_id');
+    }
+
+    public function roomChatSebagaiPenjual(): HasMany
+    {
+        return $this->hasMany(RoomChat::class, 'penjual_id');
+    }
+
+    public function pushSubscriptions(): HasMany
+    {
+        return $this->hasMany(PushSubscription::class, 'user_id');
+    }
+
     public function urlFotoProfil(): ?string
     {
         if (empty($this->foto_profil)) {

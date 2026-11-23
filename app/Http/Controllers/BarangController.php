@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\FotoBarang;
 use App\Models\Kategori;
+use App\Models\RoomChat;
 use App\Models\Wilayah;
 use App\Models\Wishlist;
 use Database\Seeders\KategoriSeeder;
@@ -355,10 +356,23 @@ class BarangController extends Controller
         $barang->load(['penjual', 'kategori', 'kecamatan.induk.induk', 'foto']);
 
         $dalamWishlist = false;
+        $roomChatSudahAda = null;
+        $jumlahRoomBarangIni = 0;
+
         if ($request->user()) {
-            $dalamWishlist = Wishlist::where('user_id', $request->user()->id)
+            $userId = (int) $request->user()->id;
+
+            $dalamWishlist = Wishlist::where('user_id', $userId)
                 ->where('barang_id', $barang->id)
                 ->exists();
+
+            if ($userId === (int) $barang->user_id) {
+                $jumlahRoomBarangIni = RoomChat::where('barang_id', $barang->id)->count();
+            } else {
+                $roomChatSudahAda = RoomChat::where('barang_id', $barang->id)
+                    ->where('pembeli_id', $userId)
+                    ->first();
+            }
         }
 
         // Periksa apakah route chat sudah tersedia di proyek
@@ -374,6 +388,8 @@ class BarangController extends Controller
             'barang' => $barang,
             'dalamWishlist' => $dalamWishlist,
             'namaRouteChat' => $namaRouteChat,
+            'roomChatSudahAda' => $roomChatSudahAda,
+            'jumlahRoomBarangIni' => $jumlahRoomBarangIni,
         ]);
     }
 

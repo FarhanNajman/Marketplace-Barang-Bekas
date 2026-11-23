@@ -55,6 +55,11 @@ class Barang extends Model
         return $this->hasMany(Wishlist::class, 'barang_id');
     }
 
+    public function roomChat(): HasMany
+    {
+        return $this->hasMany(RoomChat::class, 'barang_id');
+    }
+
     public function hargaRupiah(): string
     {
         return 'Rp' . number_format((int) $this->harga, 0, ',', '.');

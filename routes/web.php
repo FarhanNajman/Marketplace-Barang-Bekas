@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PushSubscriptionController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,31 @@ Route::middleware('auth')->group(function () {
 
 // Halaman Detail Barang (Publik — diletakkan setelah /barang/tambah agar tidak tertangkap wildcard)
 Route::get('/barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
+
+// Fitur Room Chat & Notifikasi Pesan (Hanya untuk pengguna yang sudah login)
+Route::middleware('auth')->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/barang/{barang}/chat', [ChatController::class, 'mulai'])->name('chat.mulai');
+    Route::get('/barang/{barang}/chat', [ChatController::class, 'mulai'])->name('chat.mulai.get');
+    Route::get('/chat/{roomChat}', [ChatController::class, 'show'])
+        ->whereNumber('roomChat')
+        ->name('chat.show');
+    Route::post('/chat/{roomChat}/pesan', [ChatController::class, 'kirimPesan'])
+        ->whereNumber('roomChat')
+        ->name('chat.pesan.store');
+    Route::post('/chat/{roomChat}/baca', [ChatController::class, 'tandaiDibaca'])
+        ->whereNumber('roomChat')
+        ->name('chat.baca');
+    Route::get('/chat/{roomChat}/pesan-baru', [ChatController::class, 'pesanBaru'])
+        ->whereNumber('roomChat')
+        ->name('chat.pesan.baru');
+    Route::get('/chat-notifikasi/status', [ChatController::class, 'notifikasiStatus'])
+        ->name('chat.notifikasi.status');
+    Route::post('/web-push/subscribe', [PushSubscriptionController::class, 'store'])
+        ->name('webpush.subscribe');
+    Route::post('/web-push/unsubscribe', [PushSubscriptionController::class, 'destroy'])
+        ->name('webpush.unsubscribe');
+});
 
 // Fitur Wishlist (Hanya untuk pengguna yang sudah login)
 Route::middleware('auth')->group(function () {
